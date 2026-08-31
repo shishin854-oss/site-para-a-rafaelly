@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<title>Para você</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     ESTRELAS DE FUNDO (canvas, geradas via JS — não precisa mexer)
+     ============================================================ -->
+<canvas id="stars-canvas"></canvas>
+
+<!-- ============================================================
+     BOTÃO DE MÚSICA
+     Troque o arquivo em assets/musica.mp3 pela música que quiser.
+     ============================================================ -->
+<audio id="bg-music" src="assets/musica.mp3" loop preload="none"></audio>
+<button id="music-toggle" aria-label="Tocar ou pausar música" class="music-btn">
+  <svg id="icon-play" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+  <svg id="icon-pause" viewBox="0 0 24 24" width="18" height="18" style="display:none"><path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+</button>
+
+<!-- ============================================================
+     1. TELA DE ABERTURA
+     ============================================================ -->
+<section id="opening" class="screen opening">
+  <div class="opening-text">
+    <p class="line line-1">Eu fiz uma coisa para você...</p>
+    <p class="line line-2">Espero que você goste.</p>
+  </div>
+  <button id="open-btn" class="open-btn">
+    <span class="heart">♡</span> Abrir
+  </button>
+</section>
+
+<!-- Conteúdo principal, revelado depois do clique em "Abrir" -->
+<main id="main-content" class="hidden">
+
+  <!-- ==========================================================
+       2. INTRODUÇÃO
+       ========================================================== -->
+  <section class="screen intro" data-reveal>
+    <p class="reveal-line">Eu poderia escrever mil coisas sobre você...</p>
+    <p class="reveal-line">Mas talvez nenhuma delas consiga explicar exatamente o que sinto.</p>
+    <p class="reveal-line">Então decidi tentar de um jeito diferente.</p>
+  </section>
+
+  <!-- ==========================================================
+       3. FRASES — sequência cinematográfica
+       Para adicionar/alterar frases, edite o array PHRASES em script.js
+       ========================================================== -->
+  <section class="screen phrases">
+    <p id="phrase-display" class="phrase-text"></p>
+  </section>
+
+  <!-- ==========================================================
+       4. GALERIA DELA
+       Troque NOME_DELA abaixo pelo nome dela.
+       As imagens ficam em assets/ela/ela1.jpg, ela2.jpg, ela3.jpg, ela4.jpg
+       ========================================================== -->
+  <section class="screen gallery-section" data-reveal>
+    <h2 class="section-title">Um pouco da pessoa que eu amo.</h2>
+    <div class="gallery-grid">
+      <figure class="gallery-item" data-reveal>
+        <img src="assets/ela/ela1.jpg" alt="NOME_DELA" loading="lazy">
+        <figcaption>o sorriso que eu mais gosto de ver</figcaption>
+      </figure>
+      <figure class="gallery-item" data-reveal>
+        <img src="assets/ela/ela2.jpg" alt="NOME_DELA" loading="lazy">
+      </figure>
+      <figure class="gallery-item" data-reveal>
+        <img src="assets/ela/ela3.jpg" alt="NOME_DELA" loading="lazy">
+        <figcaption>esse dia comum que virou memória</figcaption>
+      </figure>
+      <figure class="gallery-item" data-reveal>
+        <img src="assets/ela/ela4.jpg" alt="NOME_DELA" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <!-- Lightbox da galeria -->
+  <div id="lightbox" class="lightbox hidden">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <!-- ==========================================================
+       5. UMA PARTE SOBRE ELA
+       Edite os pequenos textos em .about-line conforme quiser.
+       ========================================================== -->
+  <section class="screen about-her" data-reveal>
+    <h2 class="section-title">Se eu tivesse que explicar você...</h2>
+    <div class="about-lines">
+      <p class="about-line">Seu sorriso.</p>
+      <p class="about-line">Seu jeito.</p>
+      <p class="about-line">Seu olhar.</p>
+      <p class="about-line">Suas pequenas manias.</p>
+      <p class="about-line">A maneira como você consegue fazer falta mesmo quando acabou de falar comigo.</p>
+      <p class="about-line about-you">Você.</p>
+    </div>
+    <p class="about-final">E talvez seja justamente isso que eu mais amo.</p>
+  </section>
+
+  <!-- ==========================================================
+       6. FOTO DOS NOSSOS PERSONAGENS
+       Troque assets/personagens.jpg pela foto dos personagens de jogo.
+       ========================================================== -->
+  <section class="screen characters-section" data-reveal>
+    <p class="reveal-line">Até nos mundos que a gente inventou...</p>
+    <div class="zoom-image-wrap">
+      <img src="assets/personagens.jpg" alt="Nossos personagens" class="zoom-image">
+    </div>
+    <p class="reveal-line">...eu gosto quando nossas histórias acabam no mesmo lugar.</p>
+  </section>
+
+  <!-- ==========================================================
+       7. MOMENTO MAIS ESPECIAL
+       Troque assets/nos-dois-ia.jpg pela imagem gerada de vocês dois.
+       ========================================================== -->
+  <section class="screen special-section" data-reveal>
+    <p class="reveal-line">Mas existe uma imagem que eu queria guardar de um jeito diferente.</p>
+    <p class="reveal-line">Porque é assim que eu gostaria de estar agora.</p>
+    <div class="special-image-wrap">
+      <img src="assets/nos-dois-ia.jpg" alt="Nós dois" class="special-image">
+      <div class="special-glow"></div>
+    </div>
+    <p class="reveal-line">Se eu pudesse escolher um lugar para estar agora...</p>
+    <p class="reveal-line">seria aí.</p>
+    <p class="reveal-line emphasis">Nos seus braços.</p>
+  </section>
+
+  <!-- ==========================================================
+       8. CARTA
+       Substitua o texto dentro de #letter-text pela sua própria carta.
+       ========================================================== -->
+  <section class="screen letter-section" data-reveal>
+    <h2 class="section-title">Uma coisa que eu queria te dizer...</h2>
+    <div class="letter-paper">
+      <!-- ======= SUBSTITUA A CARTA ABAIXO PELA SUA ======= -->
+      <p id="letter-text" class="letter-text" data-typewriter>Eu não sei se consigo colocar em palavras tudo aquilo que sinto por você.
+
+Só sei que, de alguma forma, você se tornou uma das partes mais bonitas dos meus dias.
+
+E mesmo quando estamos longe, existe alguma coisa em você que continua perto de mim.
+
+Obrigado por existir na minha vida.
+
+Eu te amo.</p>
+      <!-- ======= FIM DA CARTA ======= -->
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       9. FINAL
+       Troque assets/nos-dois-final.jpg pela última foto de vocês dois.
+       ========================================================== -->
+  <section class="screen final-section" data-reveal>
+    <p class="reveal-line">Eu não sei o que o futuro guarda para nós.</p>
+    <p class="reveal-line">Mas sei de uma coisa.</p>
+    <p class="reveal-line">Se eu pudesse escolher novamente...</p>
+    <p class="reveal-line emphasis">...eu escolheria você.</p>
+    <p class="reveal-line final-love">Eu te amo. ❤️</p>
+    <p class="reveal-line fim-text">Fim?</p>
+    <p class="reveal-line depois-text">Talvez seja só o começo.</p>
+    <img src="assets/nos-dois-final.jpg" alt="Nós dois" class="final-image">
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
